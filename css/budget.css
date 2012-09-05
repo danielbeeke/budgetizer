@@ -1,0 +1,16 @@
+.input-no-margin {
+  margin: 0px !important;
+  padding: 0px 4px !important;
+}
+
+span.icon {
+  margin-right: 5px;
+}
+
+thead a {
+  display: block;
+}
+
+#save-btn {
+  margin-left: 10px;
+}

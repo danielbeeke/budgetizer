@@ -1,0 +1,123 @@
+<!doctype html>
+<html ng-app>
+<head>
+  <title>Budget</title>
+
+  <!-- CSS files -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/budget.css" rel="stylesheet">
+
+</head>
+<body>
+
+  <div class="container-fluid" ng-controller="Budgetizer">
+    <div class="row-fluid">
+      <div class="span2">
+      <!--Sidebar content-->
+      </div>
+      <div class="span8">
+        <div class="hero-unit">
+          <h1>Budgetizer</h1>
+        </div>
+
+          <a id="save-btn" class="btn btn-large btn-primary pull-right" href="#save"><span class="icon-download-alt icon-white"></span> Download als bestand</a>
+
+          <a class="btn btn-large pull-right" href="#save"><span class="icon-file"></span> Laad een bestand</a>
+
+          <div class="clearfix"></div>
+          <ul class="nav nav-tabs">
+          <li class="active">
+          <a href="#">Home</a>
+          </li>
+          <li><a href="#">F.A.Q.</a></li>
+          <li><a href="#">Meer</a></li>
+          </ul>
+      </div>
+      <div class="span2">
+      <!--Sidebar content-->
+      </div>
+    </div>
+  </div>
+
+
+  <div class="container-fluid" ng-controller="Budgetizer">
+    <div class="row-fluid">
+      <div class="span2">
+      <!--Sidebar content-->
+      </div>
+      <div class="span8">
+        <div class="row-fluid"  ng-repeat="budgetTable in budgetTables">
+        <!--Body content-->
+          <h2>{{budgetTable.label}}</h2>
+          <table id="{{part.key}}" class="table table-striped table-bordered table-condensed" ng-repeat="part in budgetTable.parts">
+            <thead>
+              <tr>
+                <th><a ng:click="flipTable(part)"><span class="icon icon-minus"></span>{{part.label}}</a></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="item in part.items">
+                <td class="span11">{{item.label}}</td>
+                <td class="span1"><input type="number" name="value" min="0" class="input-no-margin pull-right input-small" ng-model="item.value"></td>
+              </tr>
+              <tr class="info">
+                <td><strong class="pull-right"><em>Subtotaal {{part.label}}</em></strong></td>
+                <td><strong>{{part.SubSubTotal}}</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Totals-->
+        <div class="row-fluid">
+          <table class="table table-striped table-bordered table-condensed">
+            <thead>
+              <tr>
+                <th>Subtotalen</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="budgetTable in budgetTables">
+                <td class="span11"><strong class="pull-right"><em>Subtotaal {{budgetTable.label}}</em></strong></td>
+                <td class="span1"><strong >{{budgetTable.SubTotal}}</strong></td>
+              </tr>
+            </tbody>
+          </table>
+
+        <!-- Sum-->
+        <div class="row-fluid">
+          <table class="table table-bordered table-condensed">
+            <tbody>
+              <tr>
+                <td class="span11"><strong class="pull-right"><em>Totaal inkomsten per maand</em></strong></td>
+                <td class="span1"><strong >{{GetTotalIncome()}}</strong></td>
+              </tr>
+              <tr>
+                <td class="span11"><strong class="pull-right"><em>Totaal uitgaven per maand</em></strong></td>
+                <td class="span1"><strong >{{GetTotalOutcome()}}</strong></td>
+              </tr>
+              <tr class="{{GetSumClass()}}">
+                <td class="span11 {{GetSumClass()}}"><strong class="pull-right"><em>Uitkomst</em></strong></td>
+                <td class="span1 {{GetSumClass()}}"><strong >{{GetSum()}}</strong></td>
+              </tr>
+            </tbody>
+          </table>
+
+      </div>
+      <div class="span2">
+      <!--Sidebar content-->
+      </div>
+    </div>
+    <!--Trigger calculate function-->
+    {{calculate()}}
+  </div>
+
+  <!-- Javascript files -->
+  <script src="js/angular.min.js"></script>
+  <script src="js/angular-resource.min.js"></script>
+  <script src="js/jquery-1.8.1.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/budget.js"></script>
+
+</body>
+</html>
